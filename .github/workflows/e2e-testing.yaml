@@ -13,5 +13,5 @@ jobs:
         with:
           java-version: 8
       - name: Build tests
-        run: mvn '-Dtest=es.codeurjc.daw.e2e.*' test
+        run: mvn '-Dtest=es.codeurjc.daw.e2e' test
      
