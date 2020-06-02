@@ -32,7 +32,7 @@ public class SeleniumTest {
 
 	@BeforeAll
 	public static void setupClass() {
-		WebDriverManager.chromedriver().setup();
+		WebDriverManager.chromedriver().browserPath("/wd/hub").setup();
 	}
 
 	@BeforeEach
