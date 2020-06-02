@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      hub:
+        image: selenium/standalone-chrome:3.141.59 
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 8
@@ -14,4 +17,3 @@ jobs:
           java-version: 8
       - name: mvn test e2e
         run: mvn '-Dtest=es.codeurjc.daw.e2e.**' test
-     
