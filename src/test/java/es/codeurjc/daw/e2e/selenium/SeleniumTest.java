@@ -24,8 +24,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SeleniumTest {
 
-	@LocalServerPort
-    int port;
+	// @LocalServerPort
+    int port=4444;
 
 	private WebDriver driver;
 	private WebDriverWait wait;

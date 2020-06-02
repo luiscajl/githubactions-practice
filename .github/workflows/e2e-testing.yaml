@@ -17,10 +17,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Download and install chromedriver
-        run: |
-          wget http://chromedriver.storage.googleapis.com/77.0.3865.10/chromedriver_linux64.zip
-          sudo unzip chromedriver_linux64.zip -d /usr/local/bin
-          export CHROME_BIN=chromium-browser
+      - name: <e.g. Selenoid >
+        uses: ajinx/selenoid@v2
       - name: mvn test e2e
         run: mvn '-Dtest=es.codeurjc.daw.e2e.**' test
