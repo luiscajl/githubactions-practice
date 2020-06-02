@@ -18,6 +18,6 @@ jobs:
       - name: Install Google Chrome 
         run: |
           chmod +x install-chrome.sh
-          install-chrome.sh
+          ./install-chrome.sh
       - name: mvn test e2e
         run: mvn '-Dtest=es.codeurjc.daw.e2e.**' test
