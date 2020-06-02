@@ -10,6 +10,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Build Maven
+      - name: Build tests
         run: mvn '-Dtest=es.codeurjc.daw.unitary.*Test' test
      
