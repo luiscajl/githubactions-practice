@@ -17,7 +17,7 @@ jobs:
           java-version: 8
       - name: Install Google Chrome 
         run: |
-          chmod +x ./github/workflows/install-chrome.sh
-          ./github/workflows/install-chrome.sh
+          chmod +x install-chrome.sh
+          install-chrome.sh
       - name: mvn test e2e
         run: mvn '-Dtest=es.codeurjc.daw.e2e.**' test
