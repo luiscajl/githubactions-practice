@@ -13,10 +13,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,26 +28,28 @@ import org.springframework.boot.web.server.LocalServerPort;
 
 import es.codeurjc.daw.Application;
 import es.codeurjc.daw.e2e.selenium.pages.BlogIndexPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SeleniumTest {
 
-	// @LocalServerPort
-	int port = 4444;
+	@LocalServerPort
+	int port;
 
-	private WebDriver driver;
+	private RemoteWebDriver driver;
 	private WebDriverWait wait;
 
-	// @BeforeAll
-	// public static void setupClass() {
-	// 	// WebDriverManager.chromedriver().browserPath("/wd/hub").setup();
-	// }
 
 	@BeforeEach
 	public void setupTest() throws MalformedURLException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		driver = new RemoteWebDriver(new URL( "http://localhost:4444/wd/hub"),capabilities);
+		// capabilities.setCapability("version", "latest");
+		capabilities.setCapability("network", true); // To enable network logs
+        capabilities.setCapability("visual", true); // To enable step by step screenshot
+        capabilities.setCapability("video", true); // To enable video recording
+        capabilities.setCapability("console", true); // To capture console logs
+		capabilities.setCapability("platform", Platform.LINUX);
+		capabilities.setCapability("name", "Testing Selenium");
+		driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),capabilities);
 		wait = new WebDriverWait(driver, 10);
 	}
 
@@ -57,7 +62,7 @@ public class SeleniumTest {
 
 	@Test
 	@DisplayName("Crear un post y verificar que se crea correctamente")
-	public void createPostTest() throws Exception{
+	public void createPostTest() throws Exception {
 
 		BlogIndexPage blog = new BlogIndexPage(driver, port);
 
@@ -65,18 +70,14 @@ public class SeleniumTest {
 		String content = "Mi contenido";
 
 		blog
-			// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
-			.get()
-			.goToCreatePostPage()
-			// CREAMOS UN NUEVO POST
-			.fillForm(title, content)
-			.submitForm()
-			// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
-			.assertPostSuccessfullyCreated(title, content)
-			// COMPROBAMOS QUE EXISTE EN LA PÁGINA PRINCIPAL
-			.goToBlogIndexPage()
-			.assertPostExist(title)
-			;
+				// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
+				.get().goToCreatePostPage()
+				// CREAMOS UN NUEVO POST
+				.fillForm(title, content).submitForm()
+				// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
+				.assertPostSuccessfullyCreated(title, content)
+				// COMPROBAMOS QUE EXISTE EN LA PÁGINA PRINCIPAL
+				.goToBlogIndexPage().assertPostExist(title);
 	}
 
 	@Test
@@ -92,20 +93,16 @@ public class SeleniumTest {
 		String message = "Buen comentario";
 
 		blog
-			// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
-			.get()
-			.goToCreatePostPage()
-			// CREAMOS UN NUEVO POST
-			.fillForm(title, content)
-			.submitForm()
-			// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
-			.assertPostSuccessfullyCreated(title, content)
-			// CREAMOS UN NUEVO COMENTARIO
-			.fillCommentForm(author, message)
-			.submitCommentForm()
-			// COMPROBAMOS QUE SE HA CREADO EL COMENTARIO
-			.assertCommentSuccessfullyCreated(author, message)
-			;		
+				// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
+				.get().goToCreatePostPage()
+				// CREAMOS UN NUEVO POST
+				.fillForm(title, content).submitForm()
+				// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
+				.assertPostSuccessfullyCreated(title, content)
+				// CREAMOS UN NUEVO COMENTARIO
+				.fillCommentForm(author, message).submitCommentForm()
+				// COMPROBAMOS QUE SE HA CREADO EL COMENTARIO
+				.assertCommentSuccessfullyCreated(author, message);
 	}
 
 	@Test
@@ -121,24 +118,20 @@ public class SeleniumTest {
 		String message = "Buen comentario";
 
 		blog
-			// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
-			.get()
-			.goToCreatePostPage()
-			// CREAMOS UN NUEVO POST
-			.fillForm(title, content)
-			.submitForm()
-			// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
-			.assertPostSuccessfullyCreated(title, content)
-			// CREAMOS UN NUEVO COMENTARIO
-			.fillCommentForm(author, message)
-			.submitCommentForm()
-			// COMPROBAMOS QUE SE HA CREADO EL COMENTARIO
-			.assertCommentSuccessfullyCreated(author, message)
-			// BORRAMOS EL COMENTARIO
-			.deletComment()
-			// COMPROBAMOS QUE YA NO EXISTE
-			.assertCommentSuccessfullyDeleted(author, message)
-			;	
+				// ENTRAMOS AL BLOG Y NAVEGAMOS AL FORMULARIO
+				.get().goToCreatePostPage()
+				// CREAMOS UN NUEVO POST
+				.fillForm(title, content).submitForm()
+				// COMPROBAMOS QUE LA PÁGINA DE RESPUESTA ES CORRECTA
+				.assertPostSuccessfullyCreated(title, content)
+				// CREAMOS UN NUEVO COMENTARIO
+				.fillCommentForm(author, message).submitCommentForm()
+				// COMPROBAMOS QUE SE HA CREADO EL COMENTARIO
+				.assertCommentSuccessfullyCreated(author, message)
+				// BORRAMOS EL COMENTARIO
+				.deletComment()
+				// COMPROBAMOS QUE YA NO EXISTE
+				.assertCommentSuccessfullyDeleted(author, message);
 
 	}
 
