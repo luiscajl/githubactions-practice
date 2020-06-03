@@ -37,7 +37,7 @@ public class SeleniumTest {
         capabilities.setCapability("console", true); // To capture console logs
 		capabilities.setCapability("platform", Platform.LINUX);
 		capabilities.setCapability("name", "Testing Selenium");
-		driver = new RemoteWebDriver(new URL("http://0.0.0.0:4444/wd/hub"),capabilities);
+		driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"),capabilities);
 		wait = new WebDriverWait(driver, 10);
 	}
 
