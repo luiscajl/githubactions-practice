@@ -27,12 +27,12 @@ public class SeleniumTest {
 
 	@LocalServerPort
 	int port;
-	@Container
-	public GenericContainer hub = new GenericContainer<>("selenium/hub:3.141.59-20200525").withExposedPorts(4444);
-	@Container
-	public GenericContainer nodeChrome = new GenericContainer<>("selenium/node-chrome:3.141.59-20200525");
-	@Container
-	public GenericContainer nodeFirefox = new GenericContainer<>("selenium/node-firefox:3.141.59-20200525");
+	// @Container
+	// public GenericContainer hub = new GenericContainer<>("selenium/hub:3.141.59-20200525").withExposedPorts(4444);
+	// @Container
+	// public GenericContainer nodeChrome = new GenericContainer<>("selenium/node-chrome:3.141.59-20200525");
+	// @Container
+	// public GenericContainer nodeFirefox = new GenericContainer<>("selenium/node-firefox:3.141.59-20200525");
 
 	private RemoteWebDriver driver;
 	private WebDriverWait wait;
@@ -41,14 +41,15 @@ public class SeleniumTest {
 	public void setupTest() throws MalformedURLException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		// capabilities.setCapability("version", "latest");
-		String address = hub.getHost();
+		// hub.dependsOn(nodeChrome,nodeFirefox);
+		// String address = hub.getHost();
 		capabilities.setCapability("network", true); // To enable network logs
 		capabilities.setCapability("visual", true); // To enable step by step screenshot
 		capabilities.setCapability("video", true); // To enable video recording
 		capabilities.setCapability("console", true); // To capture console logs
 		capabilities.setCapability("platform", Platform.LINUX);
 		capabilities.setCapability("name", "Testing Selenium");
-		driver = new RemoteWebDriver(new URL( "http://"+address + ":4444/wd/hub"), capabilities);
+		driver = new RemoteWebDriver(new URL( "http://127.0.0.1:4444/wd/hub"), capabilities);
 		wait = new WebDriverWait(driver, 10);
 	}
 
