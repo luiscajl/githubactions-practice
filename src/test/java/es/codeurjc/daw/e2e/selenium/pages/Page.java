@@ -29,7 +29,7 @@ public abstract class Page {
     }
     
     protected void get(String path) {
-        driver.get("http://192.168.3.37:"+this.port+path);
+        driver.get("localhost"+this.port+path);
     }
     
     protected boolean isElementPresent(String text) {
