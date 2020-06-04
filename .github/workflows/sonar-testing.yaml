@@ -1,9 +1,8 @@
 #CADA 24 HORAS
 name: Sonar testing
 on:
-  push:
- # schedule:
-  #  - cron:  '0 0 * * *'
+  schedule:
+    - cron:  '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,5 +13,5 @@ jobs:
         with:
           java-version: 8
       - name: mvn verify sonar
-        run: mvn verify sonar:sonar -Dsonar.host.url=http://3.249.240.82:9000
+        run: mvn verify sonar:sonar -Dsonar.host.url=${SONAR_URL}
      
