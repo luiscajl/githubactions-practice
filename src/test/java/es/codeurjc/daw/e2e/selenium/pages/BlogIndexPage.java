@@ -3,11 +3,12 @@ package es.codeurjc.daw.e2e.selenium.pages;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.openqa.selenium.WebDriver;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 public class BlogIndexPage extends Page {
 
-    public BlogIndexPage(WebDriver driver, int port) {
-        super(driver, port);
+    public BlogIndexPage(WebDriver driver, int port,BrowserWebDriverContainer container) {
+        super(driver, port,container);
     }
 
     public BlogIndexPage(Page page) {

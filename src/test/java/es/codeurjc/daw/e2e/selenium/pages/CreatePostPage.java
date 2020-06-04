@@ -2,11 +2,12 @@ package es.codeurjc.daw.e2e.selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 public class CreatePostPage extends Page {
 
-    public CreatePostPage(WebDriver driver, int port) {
-        super(driver, port);
+    public CreatePostPage(WebDriver driver, int port,BrowserWebDriverContainer container) {
+        super(driver, port,container);
     }
 
     public CreatePostPage(Page page) {

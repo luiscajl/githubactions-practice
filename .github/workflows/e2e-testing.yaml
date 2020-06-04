@@ -6,23 +6,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      hub:
-        image: selenium/hub:3.141.59-20200525
-        ports:
-          - 4444:4444
-      firefox:
-        image: selenium/node-firefox:3.141.59-20200525
-        volumes:
-          - /dev/shm:/dev/shm  
-      chrome:
-        image: selenium/node-chrome:3.141.59-20200525
-        volumes:
-          - /dev/shm:/dev/shm  
-      opera:
-        image: selenium/node-opera:3.141.59-20200525
-        volumes:
-          - /dev/shm:/dev/shm           
+    # services:
+    #   hub:
+    #     image: selenium/hub:3.141.59-20200525
+    #     ports:
+    #       - 4444:4444
+    #   firefox:
+    #     image: selenium/node-firefox:3.141.59-20200525
+    #     volumes:
+    #       - /dev/shm:/dev/shm  
+    #   chrome:
+    #     image: selenium/node-chrome:3.141.59-20200525
+    #     volumes:
+    #       - /dev/shm:/dev/shm  
+    #   opera:
+    #     image: selenium/node-opera:3.141.59-20200525
+    #     volumes:
+    #       - /dev/shm:/dev/shm           
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 8

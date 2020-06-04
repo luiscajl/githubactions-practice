@@ -5,11 +5,12 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testcontainers.containers.BrowserWebDriverContainer;
 
 public class PostPage extends Page {
 
-    public PostPage(WebDriver driver, int port) {
-        super(driver, port);
+    public PostPage(WebDriver driver, int port,BrowserWebDriverContainer container) {
+        super(driver, port,container);
     }
 
     public PostPage(Page page) {
