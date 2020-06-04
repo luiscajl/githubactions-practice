@@ -1,5 +1,5 @@
 #CADA 24 HORAS
-name: Develop release
+name: Nightly develop release
 on:
   push:
     # branches:
