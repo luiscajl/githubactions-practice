@@ -13,12 +13,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-      - name: Analyze with SonarCloud
+      - name: Mvn clean package
         run: mvn clean package
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v1
         with:
           name: release.jar
-          path: /target/*.jar  
+          path: target/*.jar  
 
      
