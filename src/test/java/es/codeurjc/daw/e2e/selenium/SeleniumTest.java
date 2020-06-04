@@ -24,7 +24,7 @@ import es.codeurjc.daw.Application;
 import es.codeurjc.daw.e2e.selenium.pages.BlogIndexPage;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Testcontainers
+// @Testcontainers
 public class SeleniumTest {
 
 	@LocalServerPort
@@ -44,9 +44,9 @@ public class SeleniumTest {
 	@BeforeEach
 	public void setupTest() throws MalformedURLException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
+		chrome.start();
 		driver = chrome.getWebDriver();
-		//  new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+		// new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
 		wait = new WebDriverWait(driver, 10);
 	}
 
@@ -61,7 +61,7 @@ public class SeleniumTest {
 	@DisplayName("Crear un post y verificar que se crea correctamente")
 	public void createPostTest() throws Exception {
 
-		BlogIndexPage blog = new BlogIndexPage(driver, port,chrome);
+		BlogIndexPage blog = new BlogIndexPage(driver, port, chrome);
 
 		String title = "Mi titulo";
 		String content = "Mi contenido";
@@ -81,7 +81,7 @@ public class SeleniumTest {
 	@DisplayName("Añadir un comentario a un post y verificar que se añade el comentario")
 	public void createCommentTest() throws Exception {
 
-		BlogIndexPage blog = new BlogIndexPage(driver, port,chrome);
+		BlogIndexPage blog = new BlogIndexPage(driver, port, chrome);
 
 		String title = "Mi titulo";
 		String content = "Mi contenido";
@@ -106,7 +106,7 @@ public class SeleniumTest {
 	@DisplayName("Borrar un comentario de un post y verificar que no aparece el comentario")
 	public void deleteCommentTest() throws Exception {
 
-		BlogIndexPage blog = new BlogIndexPage(driver, port,chrome);
+		BlogIndexPage blog = new BlogIndexPage(driver, port, chrome);
 
 		String title = "Mi titulo";
 		String content = "Mi contenido";

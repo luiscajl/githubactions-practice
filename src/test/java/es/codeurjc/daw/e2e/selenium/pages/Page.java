@@ -2,6 +2,9 @@ package es.codeurjc.daw.e2e.selenium.pages;
 
 import static java.lang.String.format;
 
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -18,10 +21,10 @@ public abstract class Page {
     protected int port;
     protected BrowserWebDriverContainer container;
 
-    public Page(WebDriver driver, int port,BrowserWebDriverContainer container) {
+    public Page(WebDriver driver, int port, BrowserWebDriverContainer container) {
         this.driver = driver;
         this.port = port;
-        this.container=container;
+        this.container = container;
         this.wait = new WebDriverWait(driver, 10);
     }
 
@@ -32,8 +35,15 @@ public abstract class Page {
     }
 
     protected void get(String path) {
-        System.out.println("URL --> "+"http://"+container.getTestHostIpAddress()+":" + this.port + path);
-        driver.get("http://"+container.getTestHostIpAddress()+":" + this.port + path);
+        System.out.println("URL --> " + "http://localhost:" + this.port + path);
+        String ip = "127.0.0.1";
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            ip = address.getHostAddress();
+        } catch (Exception e) {
+        }
+        driver.get("http://" + ip + ":" + this.port + path);
+
     }
 
     protected boolean isElementPresent(String text) {
