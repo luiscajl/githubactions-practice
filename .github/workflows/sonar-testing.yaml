@@ -1,4 +1,4 @@
-name: Sonar testing
+name: Sonar Testing
 on:
   schedule:
     - cron:  '0 0 * * *'
