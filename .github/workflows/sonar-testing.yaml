@@ -1,9 +1,7 @@
-#CADA 24 HORAS
 name: Sonar testing
 on:
-  push:
-  # schedule:
-  #   - cron:  '0 0 * * *'
+  schedule:
+    - cron:  '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
