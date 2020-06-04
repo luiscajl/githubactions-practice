@@ -42,7 +42,7 @@ public abstract class Page {
             ip = address.getHostAddress();
         } catch (Exception e) {
         }
-        driver.get("http://" + ip + ":" + this.port + path);
+        driver.get("http://" + container.getTestHostIpAddress() + ":" + this.port + path);
 
     }
 
