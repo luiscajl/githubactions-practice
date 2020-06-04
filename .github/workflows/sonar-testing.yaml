@@ -13,8 +13,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-      # - name: mvn verify sonar
-      #   run: mvn verify sonar:sonar -Dsonar.host.url=${{SONAR_URL}}
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
