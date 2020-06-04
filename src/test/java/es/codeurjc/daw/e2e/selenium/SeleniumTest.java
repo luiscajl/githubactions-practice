@@ -1,24 +1,18 @@
 package es.codeurjc.daw.e2e.selenium;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.testcontainers.containers.BrowserWebDriverContainer;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import es.codeurjc.daw.Application;
 import es.codeurjc.daw.e2e.selenium.pages.BlogIndexPage;
@@ -29,12 +23,7 @@ public class SeleniumTest {
 
 	@LocalServerPort
 	int port;
-	// @Container
-	// public GenericContainer hub = new
-	// GenericContainer<>("selenium/hub:3.141.59-20200525").withExposedPorts(4444);
-	// @Container
-	// public GenericContainer nodeChrome = new
-	// GenericContainer<>("selenium/node-chrome:3.141.59-20200525");
+
 	@Container
 	BrowserWebDriverContainer chrome = new BrowserWebDriverContainer().withCapabilities(new ChromeOptions());
 
@@ -43,10 +32,8 @@ public class SeleniumTest {
 
 	@BeforeEach
 	public void setupTest() throws MalformedURLException {
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		chrome.start();
 		driver = chrome.getWebDriver();
-		// new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
 		wait = new WebDriverWait(driver, 10);
 	}
 

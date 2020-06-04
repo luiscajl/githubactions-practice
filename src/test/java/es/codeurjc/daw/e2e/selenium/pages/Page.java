@@ -35,14 +35,14 @@ public abstract class Page {
     }
 
     protected void get(String path) {
-        System.out.println("URL --> " + "http://localhost:" + this.port + path);
-        String ip = "127.0.0.1";
+        String ip = null;
         try {
             InetAddress address = InetAddress.getLocalHost();
             ip = address.getHostAddress();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        driver.get("http://" + container.getTestHostIpAddress() + ":" + this.port + path);
+        driver.get("http://" + ip + ":" + this.port + path);
 
     }
 
