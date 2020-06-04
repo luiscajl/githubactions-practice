@@ -1,9 +1,9 @@
 #CADA 24 HORAS
-name: Release
+name: Develop release
 on:
   push:
-    branches:
-      - master
+    # branches:
+    #   - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,10 +15,13 @@ jobs:
           java-version: 8
       - name: Mvn clean package
         run: mvn clean package
-      - name: Upload math result for job 1
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"  
+      - name: Generate artifact
         uses: actions/upload-artifact@v1
         with:
-          name: release.jar
+          name: nightly-${{ steps.date.outputs.date }}
           path: target/enunciado-practica-testing-1.0.0.jar  
 
      
