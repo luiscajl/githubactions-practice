@@ -19,6 +19,6 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: release.jar
-          path: target/*.jar  
+          path: target/enunciado-practica-testing-1.0.0.jar  
 
      
