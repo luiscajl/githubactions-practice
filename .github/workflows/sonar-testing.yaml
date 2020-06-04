@@ -14,5 +14,5 @@ jobs:
         with:
           java-version: 8
       - name: mvn verify sonar
-        run: mvn verify sonar:sonar -Dsonar.host.url=http://52.215.2.124:9000
+        run: mvn verify sonar:sonar -Dsonar.host.url=http://3.249.240.82:9000
      
