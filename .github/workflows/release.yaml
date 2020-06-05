@@ -16,6 +16,10 @@ jobs:
           java-version: 8
       - name: mvn package
         run: mvn -Dmaven.test.skip=true package 
+      - name: Deploy to github packages
+        run: mvn deploy -Dregistry=https://maven.pkg.github.com/luiscajl -Dtoken=GH_TOKEN  
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -36,7 +40,7 @@ jobs:
           asset_path: target/enunciado-practica-testing-1.0.0.jar 
           asset_name: release.zip
           asset_content_type: application/zip  
-      - name: Build and publish to private docker registry
+      - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
