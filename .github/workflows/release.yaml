@@ -17,9 +17,9 @@ jobs:
       - name: mvn package
         run: mvn -Dmaven.test.skip=true package 
       - name: Deploy to github packages
-        run: mvn deploy -Dtoken=GH_TOKEN  
+        run: mvn -B deploy  
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
