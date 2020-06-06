@@ -17,7 +17,7 @@ jobs:
       - name: mvn package
         run: mvn -Dmaven.test.skip=true package 
       - name: Deploy to github packages
-        run: mvn -B deploy -Dversion=$GITHUB_REF 
+        run: mvn -B  -Dversion=$GITHUB_REF  deploy 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REF:  ${{ github.ref }}  
