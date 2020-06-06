@@ -17,7 +17,7 @@ jobs:
       - name: mvn package
         run: mvn -Dmaven.test.skip=true package 
       - name: Deploy to github packages
-        run: mvn deploy -Dregistry=https://maven.pkg.github.com/luiscajl/githubactions-practice -Dtoken=GH_TOKEN  
+        run: mvn deploy -Dtoken=GH_TOKEN  
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
