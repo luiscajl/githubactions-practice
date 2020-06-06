@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           ref: master
       - name: Set up JDK 8
@@ -38,7 +38,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: target/enunciado-practica-testing-1.0.0.jar 
-          asset_name: release.zip
+          asset_name: ${{ github.ref }}.zip
           asset_content_type: application/zip  
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
