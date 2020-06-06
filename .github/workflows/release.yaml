@@ -17,9 +17,10 @@ jobs:
       - name: mvn package
         run: mvn -Dmaven.test.skip=true package 
       - name: Deploy to github packages
-        run: mvn -B deploy  
+        run: mvn -B deploy -Dversion=$GITHUB_REF 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF:  ${{ github.ref }}  
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
