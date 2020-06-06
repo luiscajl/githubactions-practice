@@ -23,10 +23,6 @@ jobs:
         with:
           name: nightly-${{ steps.date.outputs.date }}
           path: target/enunciado-practica-testing-1.0.0.jar  
-      - name: Deploy to github packages
-        run: mvn -B deploy  
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
