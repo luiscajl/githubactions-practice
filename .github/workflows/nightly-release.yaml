@@ -24,9 +24,9 @@ jobs:
           name: nightly-${{ steps.date.outputs.date }}
           path: target/enunciado-practica-testing-1.0.0.jar  
       - name: Deploy to github packages
-        run: mvn deploy -Dregistry=https://maven.pkg.github.com/luiscajl/githubactions-practice -Dtoken=GH_TOKEN  
+        run: mvn -B deploy  
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
