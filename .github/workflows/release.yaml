@@ -19,11 +19,11 @@ jobs:
       - name: Deploy to github packages
         run: mvn -B deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}              
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: luiscajl/practicatesting
-          tags: ${{ github.ref }}
+          tag_with_ref: true
