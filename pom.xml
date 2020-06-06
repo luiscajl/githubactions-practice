@@ -89,4 +89,12 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub luiscajl Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/luiscajl/githubactions-practice</url>
+		</repository>
+	</distributionManagement>
+
 </project>
