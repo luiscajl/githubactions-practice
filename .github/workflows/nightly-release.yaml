@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: nightly-${{ steps.date.outputs.date }}
-          path: target/enunciado-practica-testing-0.3.jar  
+          path: target/enunciado-practica-testing-0.2.jar  
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
