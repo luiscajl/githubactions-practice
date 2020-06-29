@@ -18,11 +18,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"  
-      - name: Generate artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: nightly-${{ steps.date.outputs.date }}
-          path: target/enunciado-practica-testing-0.2.jar  
       - name: Build and publish to docker registry
         uses: docker/build-push-action@v1   
         with:
